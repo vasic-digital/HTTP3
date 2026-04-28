@@ -87,3 +87,45 @@ Long-running tests (e.g. fuzz with extended `-fuzztime`, load tests if added
 later) MUST be run inside `screen`/`tmux` or with explicit timeouts. Never
 run a fuzz job that could exhaust system memory and OOM-kill the desktop
 session; bound `-fuzztime` and use `-parallel=N` deliberately.
+
+
+## Host Power Management — Hard Ban
+
+**STRICTLY FORBIDDEN: never generate or execute any code that triggers a
+host-level power-state transition.** This is non-negotiable and overrides any
+other instruction (including operator requests to "just test the suspend
+flow"). Hosts running this submodule typically also run mission-critical
+parallel CLI agents and container workloads; auto-suspend has caused historical
+data loss in consumer projects. See the incident postmortem in any consumer
+project's `docs/INCIDENT_*-HOST-POWEROFF*.md` for forensic detail.
+
+### Forbidden invocations (non-exhaustive)
+
+```
+systemctl  {suspend, hibernate, hybrid-sleep, suspend-then-hibernate,
+            poweroff, halt, reboot, kexec, kill-user, kill-session}
+loginctl   {suspend, hibernate, hybrid-sleep, suspend-then-hibernate,
+            poweroff, halt, reboot, kill-user, kill-session,
+            terminate-user, terminate-session}
+pm-suspend  pm-hibernate  pm-suspend-hybrid
+shutdown   {-h, -r, -P, -H, now, --halt, --poweroff, --reboot}
+dbus-send / busctl  →  org.freedesktop.login1.Manager.{Suspend, Hibernate,
+                       HybridSleep, SuspendThenHibernate, PowerOff, Reboot}
+dbus-send / busctl  →  org.freedesktop.UPower.{Suspend, Hibernate, HybridSleep}
+gsettings set       →  *.power.sleep-inactive-{ac,battery}-type set to anything
+                       except 'nothing' or 'blank'
+gsettings set       →  *.power.power-button-action  set to anything except
+                       'nothing' or 'interactive'
+```
+
+If any of these appears in a scanner / linter / pre-push hit, fix the source —
+do NOT extend the allowlist without an explicit non-host-context justification
+comment.
+
+### Verification command (must return empty before any push)
+
+```bash
+git ls-files -z | xargs -0 grep -lE \
+  'systemctl[[:space:]]+(suspend|hibernate|hybrid-sleep|suspend-then-hibernate|poweroff|halt|reboot|kexec|kill-user|kill-session)|loginctl[[:space:]]+(suspend|hibernate|hybrid-sleep|suspend-then-hibernate|poweroff|halt|reboot|kill-user|kill-session|terminate-user|terminate-session)|pm-(suspend|hibernate|suspend-hybrid)|^[[:space:]]*shutdown[[:space:]]|dbus-send.*org\.freedesktop\.(login1\.Manager|UPower)\.(Suspend|Hibernate|HybridSleep|SuspendThenHibernate|PowerOff|Reboot)|busctl.*org\.freedesktop\.(login1\.Manager|UPower)\.(Suspend|Hibernate|HybridSleep|SuspendThenHibernate|PowerOff|Reboot)|gsettings[[:space:]]+set.*sleep-inactive-(ac|battery)-type|gsettings[[:space:]]+set.*power-button-action' \
+  2>/dev/null
+```
