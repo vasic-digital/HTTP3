@@ -1,0 +1,16 @@
+# Build artefacts
+bin/
+*.test
+*.out
+coverage.*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+
+# Fuzz corpora outside the testdata directory
+testdata/fuzz/.cache/
