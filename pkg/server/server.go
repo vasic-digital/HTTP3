@@ -27,16 +27,16 @@ import (
 //   - Addr     — UDP listen address, e.g. ":8443" or "0.0.0.0:443".
 //   - Handler  — any net/http.Handler (gin, mux, custom, …).
 //   - TLSConf  — fully populated *tls.Config; HTTP/3 requires TLS 1.3,
-//                so TLSConf.MinVersion MUST be tls.VersionTLS13 if set.
+//     so TLSConf.MinVersion MUST be tls.VersionTLS13 if set.
 //
 // Optional:
 //
 //   - QUICConfig — quic-go-level knobs (handshake idle timeout, keep-alive,
-//                  stream limits, congestion control). Nil = quic-go default.
-//                  Per-request read/write timeouts are handler-level concerns
-//                  in HTTP/3 — wrap your handler with http.TimeoutHandler or
-//                  use a context-aware middleware. The QUIC layer's idle and
-//                  keep-alive timers live on quic.Config, not on this struct.
+//     stream limits, congestion control). Nil = quic-go default.
+//     Per-request read/write timeouts are handler-level concerns
+//     in HTTP/3 — wrap your handler with http.TimeoutHandler or
+//     use a context-aware middleware. The QUIC layer's idle and
+//     keep-alive timers live on quic.Config, not on this struct.
 type Config struct {
 	Addr       string
 	Handler    http.Handler

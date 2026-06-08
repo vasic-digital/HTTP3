@@ -29,9 +29,9 @@ func must(t *testing.T) Config {
 func TestConfigValidate(t *testing.T) {
 	t.Parallel()
 	cases := []struct {
-		name     string
-		mutate   func(*Config)
-		wantErr  string
+		name    string
+		mutate  func(*Config)
+		wantErr string
 	}{
 		{
 			name:    "valid config passes",
@@ -92,8 +92,8 @@ func TestConfigValidate(t *testing.T) {
 func TestNewForcesTLS13MinVersionAndH3ALPN(t *testing.T) {
 	t.Parallel()
 	cfg := must(t)
-	cfg.TLSConf.MinVersion = 0      // caller did not set it
-	cfg.TLSConf.NextProtos = nil    // caller did not set ALPN
+	cfg.TLSConf.MinVersion = 0   // caller did not set it
+	cfg.TLSConf.NextProtos = nil // caller did not set ALPN
 
 	srv, err := New(cfg)
 	if err != nil {
