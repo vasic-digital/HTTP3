@@ -1,0 +1,4 @@
+=== Chaos Test Report ===
+Test:       TestChaosConfigNilFields
+Timestamp:  2026-06-21T15:40:58Z
+Detail:     cases=5 correct=5 panicked=0

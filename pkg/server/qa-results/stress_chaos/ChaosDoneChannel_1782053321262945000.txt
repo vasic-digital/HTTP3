@@ -1,0 +1,4 @@
+=== Chaos Test Report ===
+Test:       TestChaosDoneChannel
+Timestamp:  2026-06-21T14:48:41Z
+Detail:     Done channel behaviour verified for never-started and started-shutdown cases

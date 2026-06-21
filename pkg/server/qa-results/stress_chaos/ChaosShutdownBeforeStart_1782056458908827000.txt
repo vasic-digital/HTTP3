@@ -1,0 +1,4 @@
+=== Chaos Test Report ===
+Test:       TestChaosShutdownBeforeStart
+Timestamp:  2026-06-21T15:40:58Z
+Detail:     Shutdown before Start completed without panic or error

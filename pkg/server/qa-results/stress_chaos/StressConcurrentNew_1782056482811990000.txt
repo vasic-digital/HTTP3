@@ -1,0 +1,12 @@
+=== Stress Test Report ===
+Test:       TestStressConcurrentNew
+Timestamp:  2026-06-21T15:41:22Z
+Iterations: 100
+Passed:     100
+Failed:     0
+Min:        0s
+P50:        0s
+P95:        0s
+P99:        0s
+Max:        0s
+Mean:       0s

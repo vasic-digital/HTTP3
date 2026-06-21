@@ -1,0 +1,12 @@
+=== Stress Test Report ===
+Test:       TestStressConfigValidateMixed
+Timestamp:  2026-06-21T15:40:58Z
+Iterations: 100
+Passed:     100
+Failed:     0
+Min:        0s
+P50:        84ns
+P95:        667ns
+P99:        15µs
+Max:        15µs
+Mean:       391ns

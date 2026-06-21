@@ -1,0 +1,4 @@
+=== Chaos Test Report ===
+Test:       TestChaosDoubleStart
+Timestamp:  2026-06-21T14:48:41Z
+Detail:     double_start racers=2 success=1 errors=1
