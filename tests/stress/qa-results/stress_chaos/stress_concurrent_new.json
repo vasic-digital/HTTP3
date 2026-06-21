@@ -1,0 +1,6 @@
+{
+  "N": 100,
+  "all_pass": true,
+  "errors": 0,
+  "test": "TestStressConcurrentNew"
+}

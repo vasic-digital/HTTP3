@@ -1,0 +1,30 @@
+[
+  {
+    "name": "zero",
+    "min_version": 0,
+    "valid": true
+  },
+  {
+    "name": "tls1.0",
+    "min_version": 769,
+    "valid": false,
+    "error": "http3: Config.TLSConf.MinVersion must be tls.VersionTLS13 or unset"
+  },
+  {
+    "name": "tls1.1",
+    "min_version": 770,
+    "valid": false,
+    "error": "http3: Config.TLSConf.MinVersion must be tls.VersionTLS13 or unset"
+  },
+  {
+    "name": "tls1.2",
+    "min_version": 771,
+    "valid": false,
+    "error": "http3: Config.TLSConf.MinVersion must be tls.VersionTLS13 or unset"
+  },
+  {
+    "name": "tls1.3",
+    "min_version": 772,
+    "valid": true
+  }
+]

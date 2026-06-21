@@ -1,0 +1,4 @@
+=== Chaos Test Report ===
+Test:       TestChaosConcurrentShutdown
+Timestamp:  2026-06-21T12:41:16Z
+Detail:     concurrent Shutdown workers=10 errors=0

@@ -1,0 +1,52 @@
+[
+  {
+    "name": "all_fields_missing",
+    "description": "Addr empty, Handler nil, TLSConf nil",
+    "error_msg": "http3: Config.Addr is required"
+  },
+  {
+    "name": "empty_addr_only",
+    "description": "Addr is empty, everything else valid",
+    "error_msg": "http3: Config.Addr is required"
+  },
+  {
+    "name": "nil_handler_only",
+    "description": "Handler is nil, everything else valid",
+    "error_msg": "http3: Config.Handler is required"
+  },
+  {
+    "name": "nil_tlsconf_only",
+    "description": "TLSConf is nil, everything else valid",
+    "error_msg": "http3: Config.TLSConf is required (HTTP/3 mandates TLS 1.3)"
+  },
+  {
+    "name": "tlsconf_no_cert_no_getcert",
+    "description": "TLSConf without Certificates and without GetCertificate",
+    "error_msg": "http3: Config.TLSConf must provide Certificates or GetCertificate"
+  },
+  {
+    "name": "tlsconf_minversion_too_low",
+    "description": "TLSConf.MinVersion is TLS 1.2",
+    "error_msg": "http3: Config.TLSConf.MinVersion must be tls.VersionTLS13 or unset"
+  },
+  {
+    "name": "empty_addr_nil_handler",
+    "description": "Addr empty AND Handler nil",
+    "error_msg": "http3: Config.Addr is required"
+  },
+  {
+    "name": "empty_addr_nil_tlsconf",
+    "description": "Addr empty AND TLSConf nil",
+    "error_msg": "http3: Config.Addr is required"
+  },
+  {
+    "name": "nil_handler_nil_tlsconf",
+    "description": "Handler nil AND TLSConf nil",
+    "error_msg": "http3: Config.Handler is required"
+  },
+  {
+    "name": "triple_invalid",
+    "description": "Addr empty, Handler nil, TLSConf nil — all three invalid",
+    "error_msg": "http3: Config.Addr is required"
+  }
+]

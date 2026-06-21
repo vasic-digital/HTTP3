@@ -1,0 +1,4 @@
+=== Chaos Test Report ===
+Test:       TestChaosStartTwice
+Timestamp:  2026-06-21T12:41:16Z
+Detail:     second Start returned ErrAlreadyStarted, server then shut down cleanly

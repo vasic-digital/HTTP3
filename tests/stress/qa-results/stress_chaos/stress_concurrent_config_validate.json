@@ -1,0 +1,7 @@
+{
+  "N": 200,
+  "p50_ns": 125,
+  "p95_ns": 625,
+  "p99_ns": 791,
+  "test": "TestStressConcurrentConfigValidate"
+}

@@ -1,0 +1,5 @@
+{
+  "cycles": 10,
+  "failed": 0,
+  "test": "TestStressStartShutdownCycles"
+}

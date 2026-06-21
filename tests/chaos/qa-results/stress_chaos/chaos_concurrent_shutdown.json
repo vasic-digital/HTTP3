@@ -1,0 +1,5 @@
+{
+  "errors": 0,
+  "test": "TestChaosConcurrentShutdown",
+  "workers": 10
+}

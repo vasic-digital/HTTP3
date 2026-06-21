@@ -1,0 +1,4 @@
+=== Chaos Test Report ===
+Test:       TestChaosNewInvalidConfig
+Timestamp:  2026-06-21T12:41:16Z
+Detail:     variants=4 correct=4
