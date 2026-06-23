@@ -14,3 +14,7 @@ coverage.*
 
 # Fuzz corpora outside the testdata directory
 testdata/fuzz/.cache/
+
+# transient test-harness output (§11.4.30 — regenerable, not versioned)
+qa-results/
+**/qa-results/
