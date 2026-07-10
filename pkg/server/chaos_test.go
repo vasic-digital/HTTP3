@@ -101,7 +101,7 @@ func TestChaosConfigNilFields(t *testing.T) {
 				Handler: http.NewServeMux(),
 				TLSConf: &tls.Config{MinVersion: tls.VersionTLS13},
 			},
-			wantErr: "must provide Certificates or GetCertificate",
+			wantErr: "must provide Certificates, GetCertificate, or GetConfigForClient",
 		},
 		{
 			name: "tlsconf_minversion_too_low",

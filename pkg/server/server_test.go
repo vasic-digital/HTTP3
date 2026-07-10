@@ -58,7 +58,7 @@ func TestConfigValidate(t *testing.T) {
 			mutate: func(c *Config) {
 				c.TLSConf = &tls.Config{MinVersion: tls.VersionTLS13}
 			},
-			wantErr: "must provide Certificates or GetCertificate",
+			wantErr: "must provide Certificates, GetCertificate, or GetConfigForClient",
 		},
 		{
 			name: "TLSConf with too-low MinVersion",
@@ -86,6 +86,54 @@ func TestConfigValidate(t *testing.T) {
 				t.Fatalf("expected error containing %q, got: %v", tc.wantErr, err)
 			}
 		})
+	}
+}
+
+// TestConfigValidateAcceptsGetConfigForClientOnly is a regression test for a
+// false-negative validation defect: Config.Validate rejected any TLSConf that
+// relied solely on GetConfigForClient (no top-level Certificates or
+// GetCertificate) even though GetConfigForClient is a first-class,
+// quic-go-supported certificate source (see quic-go/http3.ConfigureTLSConfig,
+// which explicitly wraps a caller-supplied GetConfigForClient) used for
+// per-SNI cert selection and ACME/autocert-style rotation. Before the fix,
+// this legitimate, real-world Config was wrongly rejected at construction
+// time with "must provide Certificates or GetCertificate".
+func TestConfigValidateAcceptsGetConfigForClientOnly(t *testing.T) {
+	t.Parallel()
+	cfg := must(t)
+	cfg.TLSConf = &tls.Config{
+		MinVersion: tls.VersionTLS13,
+		GetConfigForClient: func(*tls.ClientHelloInfo) (*tls.Config, error) {
+			tc, err := testcert.Generate()
+			if err != nil {
+				return nil, err
+			}
+			return tc, nil
+		},
+	}
+	if err := cfg.Validate(); err != nil {
+		t.Fatalf("Validate() rejected a Config whose only cert source is "+
+			"GetConfigForClient: %v", err)
+	}
+}
+
+// TestNewSucceedsWithGetConfigForClientOnly proves the same invariant holds
+// through the full New() construction path, not just Validate() in isolation.
+func TestNewSucceedsWithGetConfigForClientOnly(t *testing.T) {
+	t.Parallel()
+	cfg := must(t)
+	cfg.TLSConf = &tls.Config{
+		GetConfigForClient: func(*tls.ClientHelloInfo) (*tls.Config, error) {
+			tc, err := testcert.Generate()
+			if err != nil {
+				return nil, err
+			}
+			return tc, nil
+		},
+	}
+	if _, err := New(cfg); err != nil {
+		t.Fatalf("New() rejected a Config whose only cert source is "+
+			"GetConfigForClient: %v", err)
 	}
 }
 

@@ -328,9 +328,9 @@ func TestChaosConcurrentShutdown(t *testing.T) {
 
 	const workers = 10
 	var (
-		wg   sync.WaitGroup
+		wg    sync.WaitGroup
 		errMu sync.Mutex
-		errs []error
+		errs  []error
 	)
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
