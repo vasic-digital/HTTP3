@@ -22,7 +22,7 @@
   {
     "name": "tlsconf_no_cert_no_getcert",
     "description": "TLSConf without Certificates and without GetCertificate",
-    "error_msg": "http3: Config.TLSConf must provide Certificates or GetCertificate"
+    "error_msg": "http3: Config.TLSConf must provide Certificates, GetCertificate, or GetConfigForClient"
   },
   {
     "name": "tlsconf_minversion_too_low",

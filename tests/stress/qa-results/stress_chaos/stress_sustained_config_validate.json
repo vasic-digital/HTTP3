@@ -1,8 +1,8 @@
 {
   "N": 500,
   "failed": 0,
-  "p50_ns": 167,
-  "p95_ns": 250,
-  "p99_ns": 1042,
+  "p50_ns": 170,
+  "p95_ns": 270,
+  "p99_ns": 311,
   "test": "TestStressSustainedConfigValidate"
 }
